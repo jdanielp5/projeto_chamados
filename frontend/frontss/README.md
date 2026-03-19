@@ -1,70 +1,226 @@
-# Getting Started with Create React App
+# Sistema de Cadastro de Chamados
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação web fullstack para gerenciamento de clientes e chamados de suporte, desenvolvida como trabalho da disciplina de Análise e Desenvolvimento de Sistemas.
 
-## Available Scripts
+## Contexto
 
-In the project directory, you can run:
+O projeto utiliza o contexto de **cadastro de chamados de suporte**. Cada chamado possui:
+- `id` (sequencial, gerado automaticamente no formato 0001)
+- `descricao`
+- `categoria` (baixo, medio, urgente)
+- `prazo`
+- `status` (aberto, em andamento, resolvido)
+- `usuarioId` e `usuarioNome` (vínculo com o cliente)
+- `data` (data de abertura)
 
-### `npm start`
+Cada cliente possui:
+- `id` (sequencial, gerado automaticamente no formato 0001)
+- `nome`
+- `email`
+- `cpf`
+- `dataNascimento`
+- `telefone`
+- `cidade`
+- `estado`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Arquitetura
 
-### `npm test`
+O projeto segue uma arquitetura **cliente-servidor** com separação clara entre frontend e backend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Visão geral
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        FRONTEND (React)                          │
+│  localhost:3001                                                  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ HTTP (fetch)
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   BACKEND (Node.js + Express)                    │
+│  localhost:3000                                                  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ fs.readFileSync / fs.writeFileSync
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      PERSISTÊNCIA (JSON)                         │
+│  backend/data/users.json                                         │
+│  backend/data/tickets.json                                       │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-### `npm run build`
+### Frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Pasta | Responsabilidade |
+|-------|-----------------|
+| `components/` | Componentes fixos de layout (Header, Nav, Footer) |
+| `pages/` | Telas por funcionalidade |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Estrutura de pastas:**
+```
+frontend/frontss/src/
+├── components/
+│   ├── header/
+│   ├── nav/
+│   └── footer/
+├── pages/
+│   ├── section/        # Página inicial com lista de chamados
+│   ├── login/          # Tela de login
+│   ├── insert/         # Cadastrar novo cliente
+│   ├── select/         # Listar clientes
+│   ├── select_id/      # Buscar cliente por ID
+│   ├── update/         # Atualizar cliente
+│   ├── deletar/        # Deletar cliente
+│   ├── chamados/       # Criar, listar e editar chamados
+│   └── cotacoes/       # Cotações em tempo real (AwesomeAPI)
+├── App.js
+└── index.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Backend
 
-### `npm run eject`
+| Pasta/Arquivo | Responsabilidade |
+|---------------|-----------------|
+| `server.js` | Configuração do Express, CORS e rotas |
+| `routes/user.routes.js` | Rotas da API de clientes |
+| `routes/ticket.routes.js` | Rotas da API de chamados |
+| `utils/fileHandler.js` | Leitura e escrita no JSON |
+| `data/users.json` | Persistência dos clientes |
+| `data/tickets.json` | Persistência dos chamados |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Estrutura de pastas:**
+```
+backend/
+├── server.js
+├── routes/
+│   ├── user.routes.js
+│   └── ticket.routes.js
+├── utils/
+│   └── fileHandler.js
+└── data/
+    ├── users.json
+    └── tickets.json
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Instalação
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Pré-requisitos
 
-## Learn More
+- Node.js 
+- npm
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Backend
+```bash
+cd backend
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Frontend
+```bash
+cd frontend/frontss
+npm install
+```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Execução
 
-### Analyzing the Bundle Size
+### 1. Iniciar o backend
+```bash
+cd backend
+node server.js
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+O servidor estará disponível em **http://localhost:3000**
 
-### Making a Progressive Web App
+### 2. Iniciar o frontend
+```bash
+cd frontend/frontss
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+A aplicação abrirá em **http://localhost:3001**
 
-### Advanced Configuration
+> **Importante:** O backend deve estar rodando antes de iniciar o frontend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Portas utilizadas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Serviço | Porta |
+|---------|-------|
+| Backend (API) | 3000 |
+| Frontend (React) | 3001 |
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Rotas da API
+
+### Clientes — base: `http://localhost:3000/users`
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET | `/` | Retorna todos os clientes |
+| GET | `/:id` | Retorna um cliente pelo ID |
+| POST | `/` | Cadastra novo cliente |
+| PUT | `/:id` | Atualiza cliente pelo ID |
+| DELETE | `/:id` | Remove cliente pelo ID |
+
+### Chamados — base: `http://localhost:3000/tickets`
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET | `/` | Retorna todos os chamados |
+| GET | `/:id` | Retorna um chamado pelo ID |
+| POST | `/` | Cria novo chamado |
+| PUT | `/:id` | Atualiza chamado pelo ID |
+
+---
+
+## API Externa
+
+O sistema consome a **AwesomeAPI** para exibir cotações em tempo real na tela de Cotações.
+
+**Endpoint utilizado:**
+```
+https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL
+```
+
+**Dados exibidos:**
+
+| Moeda | Campo | Descrição |
+|-------|-------|-----------|
+| Dólar (USD-BRL) | `bid` | Cotação de compra |
+| Euro (EUR-BRL) | `bid` | Cotação de compra |
+| Bitcoin (BTC-BRL) | `bid` | Cotação de compra |
+| Dólar (USD-BRL) | `pctChange` | Variação percentual do dia |
+
+---
+
+## Rotas do frontend
+
+| Rota | Página |
+|------|--------|
+| `/` | Login |
+| `/home` | Página inicial com chamados abertos |
+| `/insert` | Cadastrar novo cliente |
+| `/users` | Listar clientes |
+| `/user-id` | Buscar cliente por ID |
+| `/update-user` | Atualizar cliente |
+| `/delete-user` | Deletar cliente |
+| `/ticket` | Criar chamado |
+| `/tickets` | Listar chamados |
+| `/edit-ticket/:id` | Editar chamado |
+| `/cotacoes` | Cotações em tempo real |
+
+---
+
+## Tecnologias
+
+- **Frontend:** React 19, React Router DOM, CSS
+- **Backend:** Node.js, Express, CORS
+- **Persistência:** JSON com `fs.readFileSync` e `fs.writeFileSync`
+- **API Externa:** AwesomeAPI (cotações de moedas)

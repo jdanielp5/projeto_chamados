@@ -1,0 +1,33 @@
+.delete-container {
+  padding: 20px;
+  max-width: 400px;
+  margin: 50px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.delete-container h2 {
+  color: #d9534f;
+}
+
+.delete-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.delete-container button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-container button:hover {
+  background-color: #c9302c;
+}

@@ -1,0 +1,18 @@
+.header-container {
+  background-color: #1a252f;
+  color: white;
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-container h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-icon {
+  font-size: 22px;
+}

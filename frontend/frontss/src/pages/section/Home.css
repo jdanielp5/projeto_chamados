@@ -1,0 +1,118 @@
+.home-container {
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.home-header h2 {
+  font-size: 20px;
+  color: #1a252f;
+  margin: 0;
+}
+
+.home-header button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.home-header button:hover {
+  background-color: #2471a3;
+}
+
+.home-vazio {
+  color: #999;
+  text-align: center;
+  margin-top: 60px;
+  font-size: 15px;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.home-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #ccc;
+}
+
+.home-card.status-verde { border-left-color: #27ae60; }
+.home-card.status-amarelo { border-left-color: #f39c12; }
+.home-card.status-vermelho { border-left-color: #e74c3c; }
+
+.home-card-desc {
+  font-size: 14px;
+  color: #333;
+  margin: 0 0 12px;
+}
+
+.home-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-categoria {
+  font-size: 12px;
+  color: #666;
+  text-transform: capitalize;
+}
+
+.home-badge {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.home-badge.verde { background: #d5f5e3; color: #1e8449; }
+.home-badge.amarelo { background: #fef9e7; color: #b7950b; }
+.home-badge.vermelho { background: #fadbd8; color: #922b21; }
+
+.home-prazo {
+  font-size: 12px;
+  color: #999;
+  margin: 8px 0 0;
+}
+
+.cotacoes-bar {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.cotacao-item {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cotacao-item strong {
+  color: #1a252f;
+}
+
+.positivo { color: #27ae60; font-weight: 600; }
+.negativo { color: #e74c3c; font-weight: 600; }
