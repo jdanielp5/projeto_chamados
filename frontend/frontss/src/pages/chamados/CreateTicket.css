@@ -1,0 +1,91 @@
+.ticket-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ticket-container h1 {
+  font-size: 18px;
+  color: #1a252f;
+  margin: 0 0 4px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.campo label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+.ticket-container input,
+.ticket-container select,
+.ticket-container textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ticket-container textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.ticket-container button {
+  padding: 11px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.ticket-container button:hover { background-color: #2471a3; }
+
+.autocomplete-wrapper { position: relative; }
+
+.autocomplete-lista {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  max-height: 180px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.autocomplete-lista li {
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.autocomplete-lista li:hover { background-color: #f0f6fb; }
+
+.ac-nome { color: #333; }
+.ac-id   { color: #aaa; font-size: 12px; }

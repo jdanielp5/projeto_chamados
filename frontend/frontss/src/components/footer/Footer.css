@@ -1,0 +1,10 @@
+.footer-box {
+  text-align: center;
+  padding: 15px;
+  background-color: #eee;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}

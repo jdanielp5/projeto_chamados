@@ -1,0 +1,40 @@
+.update-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.update-form h2 {
+  text-align: center;
+}
+
+.update-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-form label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.update-form input {
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #aaa;
+}
+
+.update-form button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.update-form button:hover {
+  background-color: #4cae4c;
+}
