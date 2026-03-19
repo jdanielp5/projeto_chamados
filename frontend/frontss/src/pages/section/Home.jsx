@@ -4,12 +4,19 @@ import './Home.css';
 
 function Home() {
     const [tickets, setTickets] = useState([])
+    const [cotacoes, setCotacoes] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
         fetch('http://localhost:3000/tickets')
             .then(res => res.json())
             .then(data => setTickets(data))
+    }, [])
+
+    useEffect(() => {
+        fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL')
+            .then(res => res.json())
+            .then(data => setCotacoes(data))
     }, [])
 
     function getStatus(ticket) {
@@ -24,6 +31,31 @@ function Home() {
 
     return (
         <div className="home-container">
+
+            {/* Cotacoes */}
+            {cotacoes && (
+                <div className="cotacoes-bar">
+                    <span className="cotacao-item">
+                        💵 USD <strong>R$ {parseFloat(cotacoes.USDBRL.bid).toFixed(2)}</strong>
+                        <span className={parseFloat(cotacoes.USDBRL.pctChange) >= 0 ? 'positivo' : 'negativo'}>
+                            {parseFloat(cotacoes.USDBRL.pctChange) >= 0 ? ' ▲' : ' ▼'} {cotacoes.USDBRL.pctChange}%
+                        </span>
+                    </span>
+                    <span className="cotacao-item">
+                        💶 EUR <strong>R$ {parseFloat(cotacoes.EURBRL.bid).toFixed(2)}</strong>
+                        <span className={parseFloat(cotacoes.EURBRL.pctChange) >= 0 ? 'positivo' : 'negativo'}>
+                            {parseFloat(cotacoes.EURBRL.pctChange) >= 0 ? ' ▲' : ' ▼'} {cotacoes.EURBRL.pctChange}%
+                        </span>
+                    </span>
+                    <span className="cotacao-item">
+                        ₿ BTC <strong>R$ {parseFloat(cotacoes.BTCBRL.bid).toLocaleString('pt-BR')}</strong>
+                        <span className={parseFloat(cotacoes.BTCBRL.pctChange) >= 0 ? 'positivo' : 'negativo'}>
+                            {parseFloat(cotacoes.BTCBRL.pctChange) >= 0 ? ' ▲' : ' ▼'} {cotacoes.BTCBRL.pctChange}%
+                        </span>
+                    </span>
+                </div>
+            )}
+
             <div className="home-header">
                 <h2>Chamados Abertos</h2>
                 <button onClick={() => navigate('/ticket')}>+ Novo Chamado</button>
